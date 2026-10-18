@@ -1,0 +1,54 @@
+# =====================================================================
+# SAMPLE DATA — fictional person, for demo purposes only.
+# Replace every value with your own details to make your own video.
+# =====================================================================
+#
+# Schema:
+#   name:      Full name (string, required)
+#   title:     Professional headline (string, required)
+#   location:  City, State (string, optional)
+#   email:     Contact email (string, optional)
+#   summary:   1-2 sentence professional summary (string, required)
+#   experience: list of roles, each with:
+#       role:    Job title (string, required)
+#       org:     Employer (string, required)
+#       period:  e.g. "2021 - Present" (string, required)
+#       bullets: list of 1-4 achievement strings (required, non-empty)
+#   skills:    list of skill strings (required, non-empty)
+#   education: list of entries, each with:
+#       degree:  e.g. "B.S. Computer Science" (string, required)
+#       school:  Institution (string, required)
+#       period:  e.g. "2015 - 2019" (string, optional)
+
+name: Jordan Lee
+title: Data Analyst
+location: "Raleigh, NC"
+email: jordan.lee@example.com
+summary: >-
+  Data analyst with four years of experience turning messy operational data
+  into dashboards that operations teams actually use. I specialize in
+  Power BI, SQL, and Python, and I care about charts that tell the truth.
+experience:
+  - role: Data Analyst
+    org: Northwind Health
+    period: "2022 - Present"
+    bullets:
+      - Built a Power BI admissions dashboard used by 40+ staff, cutting weekly reporting time from 6 hours to 20 minutes.
+      - Wrote SQL data-quality checks that caught a 12% duplicate-record issue before it reached leadership reports.
+      - Automated a monthly Excel workflow in Python, saving the team an estimated 15 hours per month.
+  - role: Reporting Specialist
+    org: Blue Ridge Logistics
+    period: "2020 - 2022"
+    bullets:
+      - Maintained 25+ Tableau dashboards tracking fleet and warehouse KPIs.
+      - Partnered with operations managers to define metric definitions, reducing "whose number is right" disputes.
+skills:
+  - Power BI (DAX, Power Query)
+  - SQL
+  - Python (pandas)
+  - Tableau
+  - Data storytelling
+education:
+  - degree: B.S. Business Analytics
+    school: State University
+    period: "2016 - 2020"
