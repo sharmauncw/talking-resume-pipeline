@@ -1,0 +1,9 @@
+# Neural text-to-speech (needs network access at runtime)
+edge-tts>=6.1
+# Video assembly
+moviepy>=1.0
+# Resume parsing
+pyyaml>=6.0
+# Subtitle frame rendering
+pillow>=9.0
+numpy>=1.24
