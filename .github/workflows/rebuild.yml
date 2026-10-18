@@ -1,0 +1,41 @@
+# Rebuild the talking-resume video whenever resume.yaml changes.
+#
+# The workflow installs dependencies, runs the pipeline (a PIL title card is
+# rendered because no presenter photo is checked into the repo), and uploads
+# the resulting mp4 as a workflow artifact.
+#
+# Note: edge-tts needs network access at runtime; GitHub-hosted runners have it.
+
+name: Rebuild talking resume
+
+on:
+  push:
+    paths:
+      - "resume.yaml"
+      - "pipeline.py"
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install system deps
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Build video
+        run: python pipeline.py --resume resume.yaml --out talking_resume.mp4
+
+      - name: Upload video
+        uses: actions/upload-artifact@v4
+        with:
+          name: talking-resume-video
+          path: talking_resume.mp4
