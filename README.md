@@ -1,20 +1,39 @@
-# Talking Resume Pipeline
+<div align="center">
 
-Turn a structured resume (`resume.yaml`) into a narrated video — the "talking resume" trend from Instagram, as a reproducible Python pipeline. No paid APIs: neural TTS via `edge-tts`, video assembly via `moviepy`, subtitles rendered with PIL (no ImageMagick needed).
+# 🎙️ Talking Resume Pipeline
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![edge-tts](https://img.shields.io/badge/edge--tts-00A67E?style=for-the-badge)
+![moviepy](https://img.shields.io/badge/moviepy-FF6B6B?style=for-the-badge)
+![No Paid APIs](https://img.shields.io/badge/No_Paid_APIs-4ECDC4?style=for-the-badge)
+
+**Turn a structured resume (`resume.yaml`) into a narrated video — the "talking resume" trend from Instagram, as a reproducible Python pipeline.**
+
+*No paid APIs: neural TTS via `edge-tts`, video assembly via `moviepy`, subtitles rendered with PIL (no ImageMagick needed).*
+
+</div>
+
+## 🎬 What it does
+
+```
+resume.yaml → narration script → neural voiceover → subtitled video
+```
+
+Drop in your resume as YAML, pick a neural voice, and get a polished `talking_resume.mp4` — ready for LinkedIn, portfolios, or applications.
 
 ## Pipeline
 
 ```
 resume.yaml
-    │  load_resume()          validate schema
-    ▼
+  │  load_resume()          validate schema
+  ▼
 narration script              build_script() → sentences → subtitle segments
-    │  synthesize_narration()  edge-tts  (needs network at runtime)
-    ▼
+  │  synthesize_narration()  edge-tts  (needs network at runtime)
+  ▼
 narration.mp3 ──┬──► build_video()        moviepy + PIL
 presenter photo ┘         │  timed subtitle frames + audio
 (optional)                ▼
-                   talking_resume.mp4
+                talking_resume.mp4
 ```
 
 ## Setup
