@@ -250,9 +250,8 @@ def render_frame(photo_path, name, title, subtitle, fonts):
     return np.asarray(img)
 
 
-def build_video(photo_path, audio_path, timings, name, title, out_mp4,
-                fps=24):
-    """Assemble the final mp4: timed subtitle frames + narration audio."""
+def _require_video_deps():
+    """Fail with a clear message (no traceback) if video deps are missing."""
     if Image is None or ImageSequenceClip is None:
         sys.stderr.write(
             "ERROR: video assembly needs 'pillow' and 'moviepy'.\n"
@@ -260,6 +259,12 @@ def build_video(photo_path, audio_path, timings, name, title, out_mp4,
             "moviepy also needs an ffmpeg binary on PATH.\n"
         )
         sys.exit(2)
+
+
+def build_video(photo_path, audio_path, timings, name, title, out_mp4,
+                fps=24):
+    """Assemble the final mp4: timed subtitle frames + narration audio."""
+    _require_video_deps()
 
     fonts = {
         "title": _resolve_font(64),
@@ -322,6 +327,8 @@ def main(argv=None):
     print("Synthesizing narration (needs network for edge-tts)...")
     synthesize_narration(narration, audio_path, args.voice)
 
+    # Fail with a clear message (not a traceback) before touching AudioFileClip.
+    _require_video_deps()
     audio = AudioFileClip(audio_path)
     total = audio.duration
     timings = allocate_timings(segments, total)
